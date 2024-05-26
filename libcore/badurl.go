@@ -61,6 +61,8 @@ func NewURL(scheme string) URL {
 	return u
 }
 
+// TODO: rename to badSetPath
+//
 //go:linkname setPath net/url.(*URL).setPath
 func setPath(u *url.URL, fragment string) error
 
