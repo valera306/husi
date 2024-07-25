@@ -110,6 +110,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
         val logLevel = findPreference<LongClickListPreference>(Key.LOG_LEVEL)!!
         val mtu = findPreference<MTUPreference>(Key.MTU)!!
+        val showProxyNum = findPreference<SwitchPreference>(Key.SHOW_PROXY_NUM)!!
         val alwaysShowAddress = findPreference<SwitchPreference>(Key.ALWAYS_SHOW_ADDRESS)!!
         val blurredAddress = findPreference<SwitchPreference>(Key.BLURRED_ADDRESS)!!
 
@@ -203,6 +204,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
         inboundUsername.onPreferenceChangeListener = reloadListener
         inboundPassword.onPreferenceChangeListener = reloadListener
         mtu.onPreferenceChangeListener = reloadListener
+        showProxyNum.onPreferenceChangeListener = reloadListener
 
         blurredAddress.isEnabled = alwaysShowAddress.isChecked
         alwaysShowAddress.setOnPreferenceChangeListener { _, newValue ->

@@ -170,7 +170,7 @@ class ConfigurationFragment @JvmOverloads constructor(
 
         TabLayoutMediator(tabLayout, groupPager) { tab, position ->
             if (adapter.groupList.size > position) {
-                tab.text = adapter.groupList[position].displayName()
+                tab.text = displayGroupName(adapter.groupList[position])
             }
             tab.view.setOnLongClickListener { // clear toast
                 true
@@ -998,7 +998,7 @@ class ConfigurationFragment @JvmOverloads constructor(
             if (index == -1) return
 
             tabLayout.post {
-                tabLayout.getTabAt(index)?.text = group.displayName()
+                tabLayout.getTabAt(index)?.text = displayGroupName(group)
             }
         }
 
@@ -1757,6 +1757,16 @@ class ConfigurationFragment @JvmOverloads constructor(
     private fun cancelSearch(searchView: SearchView) {
         searchView.onActionViewCollapsed()
         searchView.clearFocus()
+    }
+
+private fun displayGroupName(group: ProxyGroup): String {
+        val groupName = group.displayName()
+         if (DataStore.showProxyNum) {
+            val proxiesCount = SagerDatabase.proxyDao.getByGroup(group.id).size
+            return "$groupName ($proxiesCount)"
+        } else {
+            return groupName
+        }
     }
 
 }
